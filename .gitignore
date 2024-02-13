@@ -7,3 +7,6 @@ docs/*
 # Ignore models
 *.joblib
 *.pt
+
+# cache
+*.pyc
