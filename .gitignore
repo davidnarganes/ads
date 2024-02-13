@@ -1,0 +1,9 @@
+# Ignore .DS_Store files
+.DS_Store
+
+# Ignore problem statements
+docs/*
+
+# Ignore models
+*.joblib
+*.pt
