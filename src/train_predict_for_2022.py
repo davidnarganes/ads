@@ -5,7 +5,8 @@ from models import (
     initialize_models, 
     train_model,
     save_model,
-    create_sequences
+    create_sequences,
+    initialize_random_seed
     )
 
 # Function to perform predictions using sktime compatible models
@@ -52,6 +53,7 @@ df.sort_values(by='date', inplace=True)
 y_train = df['y']
 
 # Initialize models
+initialize_random_seed(123)
 forecasters = initialize_models()
 
 # Train and generate predictions for each model

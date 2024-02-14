@@ -9,7 +9,8 @@ from models import (
     save_model,
     create_sequences,
     create_variable_length_sequences,
-    train_model
+    train_model,
+    initialize_random_seed
     )
 
 outdir = '../pics'
@@ -24,6 +25,9 @@ df.sort_values(by='date', inplace=True)
 use_feats = ['y','month','year']
 use_feats = ['y']
 last_idxs = [-14-12, -14, -2]
+
+# For reproducibility
+initialize_random_seed(123)
 
 for last_idx in last_idxs:
 
@@ -43,7 +47,7 @@ for last_idx in last_idxs:
             n_periods = len(y_test)
             y_pred, forecaster = forecast_and_evaluate(forecaster, y_train, y_test)
         else:
-            seqs = create_sequences(y_train.values)
+            seqs = create_sequences(y_train.values, sequence_length=12*2) # Many sliding-windows of 1xt year
             # seqs = create_variable_length_sequences(y_train.values)
             print(f'There are {len(seqs)} sequences to train on')
             train_model(forecaster, model_name, seqs, modeldir)
